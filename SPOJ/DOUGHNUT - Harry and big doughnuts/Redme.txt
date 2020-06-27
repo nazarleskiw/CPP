@@ -1,0 +1,11 @@
+Wejście
+W pierwszej linii jedna dodatnia liczba całkowita t (t <= 100) oznaczająca ilość testów 
+(Harry został poproszony o kupno pączków kilka razy). Następnie t linii, każda zawierająca 3 liczby: c, k oraz w (1 <= c, k, w <= 100)
+
+t [liczba testów]
+c k w [liczba kotów, udźwig Harrego oraz waga pączka]
+c k w [następny test]
+...
+
+Wyjście
+t linii zawierających słowo "yes" jeśli Harry jest w stanie wykonać zadanie lub "no" jeśli pączki złamałyby Harremu kręgosłup.
