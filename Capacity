@@ -1,0 +1,115 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+int main() {
+    const unsigned int vectorSize = 1100;
+    std::vector<int> wholeNumbers;
+    int a = 0;
+    int capacity;
+    std::vector<int> arr;
+    for (unsigned int i = 0; i < vectorSize; ++i) {
+        ++a;
+        wholeNumbers.push_back(a);
+        capacity = wholeNumbers.capacity();
+        arr.push_back(capacity);
+
+        for (i = 1; i < a; ++i) {
+
+            if (arr[0] < arr[i])
+                arr[0] = arr[i];
+        }
+        auto it = arr.end();
+        if (*it > arr[0])
+            std::cout << "New capacity: " << ' ' << arr[0] << std::endl;
+        else;
+    }
+
+        std::cout <<  std:: endl ;
+        std:: cout << "Vector filled with 1100 elements:" << std::endl;
+        for (auto it = wholeNumbers.begin(); it != wholeNumbers.end(); ++it)
+            std:: cout << ' ' << *it;
+
+
+    wholeNumbers.clear();
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Vector after removing all elements:" << std::endl;
+    for (auto it = wholeNumbers.begin(); it != wholeNumbers.end(); ++it)
+        std::cout << ' ' << *it;
+
+    std::cout << "Capacity: " << wholeNumbers.capacity() << std::endl;
+    std::cout << "Size: " << wholeNumbers.size() << std::endl;
+
+    wholeNumbers.shrink_to_fit();
+    std::cout << std::endl;
+
+    std::cout << "Vector after shrink to fit:" << std::endl;
+    std::cout << "Capacity: " << wholeNumbers.capacity() << std::endl;
+    std::cout << "Size: " << wholeNumbers.size() << std::endl;
+
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Insert Every Second:" << std::endl;
+    const unsigned int nSize = 10;
+
+    std::vector < int > nineNumbers;
+
+    int b = 899;
+    for (unsigned int i = 0; i < nSize; ++i) {
+        ++b;
+        nineNumbers.push_back(b);
+    }
+
+    for (auto it = nineNumbers.begin(); it != nineNumbers.end(); it++)
+        std::cout << *it << ", ";
+    std::cout << std::endl;
+
+
+    for (unsigned int j = 0; j < nSize; j++) {
+
+        int ser = nineNumbers.at(j);
+        auto it = std::find(nineNumbers.begin(), nineNumbers.end(), ser);
+
+        if (it != nineNumbers.end()) {
+            const int iter = it - nineNumbers.begin();
+            it = nineNumbers.insert(nineNumbers.begin(), iter);
+            std::cout << *it << ", ";
+
+            auto object_iter = std::find(std::begin(nineNumbers), std::end(nineNumbers), ser);
+            const size_t n = std::distance(std::begin(nineNumbers), object_iter);
+            std::cout << ser + j << ", ";
+
+        }
+    }
+
+    std::cout <<  std:: endl;
+
+    nineNumbers.erase(std::remove(nineNumbers.begin(), nineNumbers.end(), 90), nineNumbers.end());
+
+    for (unsigned int j = 0; j < nSize; j++) {
+
+        int ser = nineNumbers.at(j);
+        auto it = std::find(nineNumbers.begin(), nineNumbers.end(), ser);
+
+        if (it != nineNumbers.end()) {
+            const int iter = it - nineNumbers.begin();
+            it = nineNumbers.insert(nineNumbers.begin(), iter);
+            std::cout << *it << ", ";
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
