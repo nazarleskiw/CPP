@@ -1,0 +1,170 @@
+#include <iostream>
+#include <array>
+#include <string>
+#include <algorithm>
+#include <stdexcept>
+
+    class Person
+    {
+    private:
+        std::string  name;
+        std::string surname;
+        int age;
+    public:
+        Person() = default;
+        Person(std::string name, std::string surname, int age);
+
+        std::string get_name()
+        {
+            return name;
+        };
+        std::string get_surname()
+        {
+            return surname;
+        };
+
+        int get_age()
+        {
+            return age;
+        };
+
+        friend std::ostream& operator << (std::ostream& s, const Person & p);
+
+        static Person get_random(const std::array<std::string, 10>& name, const std::array<std::string, 10> &surname)
+        {
+            Person a{};
+            a.name = name[rand() % name.size()];
+            a.surname = surname[rand() % surname.size()];
+            a.age = rand() % (100) + 10;
+           return a;
+        }
+         };
+
+void sortSurname(std::array<Person, 10> &object)
+{
+std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_surname() < b.get_surname()); });
+}
+void sortName(std::array<Person, 10> &object)
+{
+    std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_name() < b.get_name()); });
+}
+void sortAge(std::array<Person, 10> &object)
+{
+    std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_age() < b.get_age()); });
+}
+
+void sortSurnameBackward(std::array<Person, 10> &object)
+{
+    std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_surname() > b.get_surname()); });
+}
+void sortNameBackward(std::array<Person, 10> &object)
+{
+    std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_name() > b.get_name()); });
+}
+void sortAgeBackward(std::array<Person, 10> &object)
+{
+    std::sort(object.begin(), object.end(), [](Person a, Person b) { return (a.get_age() > b.get_age()); });
+}
+
+std::ostream& operator<<(std::ostream& s,const Person & p)
+{
+    s << " " << p.name << " " << p.surname << " " << p.age;
+    return s;
+}
+
+
+
+
+int main() {
+
+//    Person pTest{"Jan", "Nowak", 44};
+//    std::cout << pTest << std::endl <<std::endl;
+
+
+    const unsigned int arraySize = 10;
+    std::array<std::string, arraySize> nameArray{"Adam", "Jan", "Michal", "Robert", "Bartlomiej", "Kamil", "Dariusz",
+                                                 "Andrzej", "Tomasz", "Sebastian"};
+    std::array<std::string, arraySize> surnameArray{"Nowak", "Kowal", "Wojcik", "Lewandowski", "Runski", "Tomski", "Wasiak", "Szolski", "Dolski", "Zabski"};
+
+
+
+    Person p1 = Person::get_random(nameArray, surnameArray);
+    std::cout << p1 << std::endl;
+    Person p2 = Person::get_random(nameArray, surnameArray);
+    std::cout << p2 << std::endl;
+    Person p3 = Person::get_random(nameArray, surnameArray);
+    std::cout << p3 << std::endl;
+    Person p4 = Person::get_random(nameArray, surnameArray);
+    std::cout << p4 << std::endl;
+    Person p5 = Person::get_random(nameArray, surnameArray);
+    std::cout << p5 << std::endl;
+    Person p6 = Person::get_random(nameArray, surnameArray);
+    std::cout << p6 << std::endl;
+    Person p7 = Person::get_random(nameArray, surnameArray);
+    std::cout << p7 << std::endl;
+    Person p8 = Person::get_random(nameArray, surnameArray);
+    std::cout << p8 << std::endl;
+    Person p9 = Person::get_random(nameArray, surnameArray);
+    std::cout << p9 << std::endl;
+    Person p10 = Person::get_random(nameArray, surnameArray);
+    std::cout << p10 << std::endl;
+
+    std::array<Person, 10> lista;
+    for (auto &element : lista)
+    {
+        element = Person::get_random(nameArray, surnameArray);
+    }
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po nazwisku: "<< std::endl;
+    sortSurname(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po imieniu: "<< std::endl;
+     sortName(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po wieku: "<< std::endl;
+    sortAge(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po nazwisku (malejaco): "<< std::endl;
+    sortSurnameBackward(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po imieniu (malejaco): "<< std::endl;
+    sortNameBackward(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout <<  "Sortowanie po wieku (malejaco): "<< std::endl;
+    sortAgeBackward(lista);
+    for (auto &element :lista) {
+        std::cout << element << " ";
+        std::cout << std::endl;
+    }
+
+
+}
+
+
