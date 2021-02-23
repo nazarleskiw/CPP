@@ -1,0 +1,47 @@
+#include <iostream>
+#include <array>
+#include <string>
+#include <algorithm>
+#include <stdexcept>
+
+int main() {
+
+    //1 kontener z listą zakupową
+    const unsigned int arraySize = 10;
+    std::array<std::string, arraySize> myArray{"Kasia", "Tomek", "Ania", "Jan", "Iza", "Marcin", "Ola", "Kamil", "Gosia", "Patryk"};
+
+    for (auto &element :myArray)
+        std::cout << element << ", ";
+    std::cout << std::endl;
+
+    std::sort(myArray.begin(), myArray.end(), [](std::string a, std::string b) { return (a > b); });
+    for (unsigned int i = 0; i < myArray.size(); ++i)
+        std::cout << myArray.at(i) << ", ";
+    std::cout << std::endl;
+
+    for (auto &element :myArray)
+         element = element + '*';
+     std::cout << std::endl;
+
+    for (auto &element :myArray)
+        element = element + std::to_string(10) ;
+    std::cout << std::endl;
+
+
+
+    for (unsigned int i = 0; i < myArray.size(); ++i)
+        std::cout <<  myArray[i] << " ";
+        std::cout << std::endl;
+
+
+
+    for (auto &element :myArray)
+        if (myArray.at(0)
+        {
+            element = "<--->";
+
+        }
+
+
+
+}
