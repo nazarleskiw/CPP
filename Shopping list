@@ -1,0 +1,94 @@
+#include <iostream>
+#include <array>
+#include <string>
+#include <algorithm>
+#include <stdexcept>
+
+
+//bool functionGreater (std::string a, std::string b)
+//{
+//    return (a < b);
+//}
+//bool functionSmaller (std::string a, std::string b)
+//{
+//    return (a > b);
+//}
+
+int main()
+{
+
+    //1 kontener z listą zakupową
+    const unsigned int arraySize = 5; // rozmiar tablicy
+    std::array<std::string, arraySize> myArray{"mleko", "cebula", "cukier", "marchew", "burak"};
+
+    //2 klasyczna pętla for
+    for (unsigned int i = 0; i < myArray.size(); ++i)
+        std::cout << myArray[i] << " ";
+    std::cout << std::endl;
+
+    // dostęp do elementów at()
+    for (unsigned int i = 0; i < myArray.size(); ++i)
+    std::cout << myArray.at(i) << " ";
+    std::cout << std::endl;
+
+    //dostęp do elementów []
+    for (unsigned int i = 0; i < myArray.size(); ++i)
+        std::cout << myArray[i] << " ";
+        std::cout << std::endl;
+
+     //pętla for typu range loop;
+        for (auto &element :myArray)
+            std::cout << element << " ";
+        std::cout << std::endl;
+
+
+        //3 rozmiar kontenera i czy jest pusty
+
+        if (myArray.empty())
+            std::cout << "myArray is empty" << std::endl;
+        else
+            std::cout << "myArray is not empty, size of myArray:" << myArray.size() << std::endl;
+
+        //4 zamienić elementy zaczynające się na literę  'm' na "ziemniaki"
+
+        for (auto &element :myArray)
+            if (element[0] == 'm') {
+                element = "ziemniaki";
+            }
+        std::cout << std::endl;
+
+
+        //6 wywołać wyjątek -7 przechwycić wyjątek
+
+        try {
+            int i = myArray.size();
+            myArray.at(i + 1) = 100;
+        }
+        catch (const std::out_of_range &e) {
+            std::cout << "Out of Range error: " << e.what() << '\n';
+        }
+
+        //8 posortować alfabetycznie
+        std::sort(myArray.begin(), myArray.end());
+        for (unsigned int i = 0; i < myArray.size(); ++i)
+            std::cout << myArray.at(i) << " ";
+        std::cout << std::endl;
+
+
+//9 posortować alfabetycznie własną funkcją porównawczą
+
+        std::sort(myArray.begin(), myArray.end(),[](std::string a, std::string b) { return (a < b); });
+        for (unsigned int i = 0; i < myArray.size(); ++i) {
+            std::cout << myArray.at(i) << " ";
+        }
+        std::cout << std::endl;
+
+//10 posortować odwrotnie alfabetycznie własną funkcją porównawczą
+        std::sort(myArray.begin(), myArray.end(), [](std::string a, std::string b) { return (a > b); });
+        for (unsigned int i = 0; i < myArray.size(); ++i)
+            std::cout << myArray.at(i) << " ";
+        std::cout << std::endl;
+
+}
+
+
