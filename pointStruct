@@ -1,0 +1,112 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+struct point
+  {
+     double x;
+     double y;
+  };
+
+point adPoint();
+void showPoind(point punkt1);
+double calcuLatelength (point punkt1, point punkt2);
+
+enum menu {
+  close, showdata, calculatelength ,modify
+};
+
+int main()
+{
+
+  point punktA, punktB;
+  punktA = adPoint();
+  punktB = adPoint();
+
+  int choice;
+  do
+    {
+      cout << "wybierz opcje:" << endl;
+      cout << "1) wyswietl dane" << endl;
+      cout << "2) oblicz dlugosc odcinka AB" << endl;
+      cout << "3) modyfikuj dane" << endl;
+      cout << "0) zamknij program" << endl;
+      cin >> choice;
+
+      switch (choice)
+      {
+      case close:
+        cout << "Zamkniecie programu" << endl;
+        break;
+      case showdata:
+          {
+          showPoind(punktA);
+          showPoind(punktB);
+          break;
+          }
+      case calculatelength:
+         {
+          cout << "Dlugosc odcinka AB: " << calcuLatelength (punktA, punktB) << endl;
+          break;
+         }
+      case modify:
+          {
+          char modifyPoint;
+          cout << "Wybierz punkt do zmiany " << endl;
+          cout << "punkt A " << endl;
+          cout << "punkt B " << endl;
+          cout << "punkt A i B " << endl;
+          cin >> modifyPoint;
+
+            if (modifyPoint == 'A')
+              {
+                punktA = adPoint();
+              }
+            else if (modifyPoint == 'B')
+              {
+                punktB = adPoint();
+              }
+            else
+              {
+                punktA = adPoint();
+                punktB = adPoint();
+              }
+          break;
+          }
+      }
+    }
+  while(choice !=0);
+    {
+
+
+    };
+
+ return 0;
+}
+
+
+point adPoint()
+{
+  point tempPoint;
+  cout << "Podaj punkt x= "<< endl;
+  cin >> tempPoint.x ;
+  cout << "Podaj punkt y= "<< endl;
+  cin >> tempPoint.y ;
+  return tempPoint;
+}
+void showPoind(point punkt1)
+{
+  cout << "Punkt :(" << punkt1.x << ", " << punkt1.y << ")" << endl;
+
+}
+
+double calcuLatelength (point punkt1, point punkt2)
+{
+  double length;
+  length = sqrt(pow(punkt1.x-punkt2.x,2)+pow(punkt1.y-punkt2.y,2));
+  return length;
+}
+
+
