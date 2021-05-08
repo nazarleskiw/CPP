@@ -1,0 +1,170 @@
+#include <iostream>
+# include <cmath>
+
+using namespace std;
+
+class Figure{
+    protected:
+        double area;
+        double circuit;
+    public:
+        Figure();
+        virtual ~Figure();
+        virtual void displaySides ();
+        virtual void changeSides ();
+        virtual double calculateArea ();
+        virtual double calculateCircuit ();
+        virtual void displayAreaCircuit();
+};
+
+Figure ::Figure(): area(0.0), circuit(0.0){}
+
+Figure::~Figure(){}
+void Figure::displaySides() {}
+void Figure::changeSides(){}
+double Figure::calculateArea()
+    {
+        return 0.0;
+    }
+double Figure::calculateCircuit()
+    {
+        return 0.0;
+    }
+void Figure::displayAreaCircuit(){}
+
+class Retrangle :public Figure {
+    private:
+        double sideA;
+        double sideB;
+    public:
+        Retrangle ();
+        Retrangle (double sideA, double sideB);
+        ~Retrangle ();
+        void displaySides ();
+        void changeSides ();
+        double calculateArea ();
+        double calculateCircuit ();
+        void displayAreaCircuit();
+};
+
+Retrangle::Retrangle(): sideA(0.0), sideB(0.0){}
+Retrangle::Retrangle(double sideA, double sideB):sideA(sideA), sideB (sideB)
+    {
+        area = this->calculateArea();
+        circuit =this ->calculateCircuit();
+    }
+Retrangle::~Retrangle(){}
+void Retrangle::displaySides()
+    {
+        cout << "Side A:" << sideA << " " << "Side B:" << sideB << endl ;
+    }
+void Retrangle::changeSides()
+    {
+        cout << "New dimensions of the sides:"  << endl;
+        cin >> sideA >> sideB ;
+        area = this ->calculateArea();
+        circuit = this -> calculateCircuit();
+    }
+double Retrangle:: calculateArea()
+    {
+        return sideA * sideB;
+    }
+double Retrangle:: calculateCircuit()
+    {
+    return  2 * sideA + 2 * sideB;
+    }
+void Retrangle::displayAreaCircuit()
+    {
+        cout << "Retrangle area:"  << area << endl;
+        cout << "Retrangle circuit:"  << circuit << endl;
+    }
+
+class Triangle :public Figure{
+    private:
+        double sideA;
+        double sideB;
+        double sideC;
+    public:
+        Triangle ();
+        Triangle (double sideA, double sideB, double sideC);
+        ~Triangle ();
+        void displaySides ();
+        void changeSides ();
+        double calculateArea ();
+        double calculateCircuit ();
+        void displayAreaCircuit();
+};
+
+Triangle::Triangle(): sideA(0.0), sideB(0.0), sideC(0.0){}
+Triangle::Triangle(double sideA, double sideB, double sideC):sideA(sideA), sideB (sideB), sideC (sideC)
+    {
+        area = this->calculateArea();
+        circuit =this ->calculateCircuit();
+    }
+Triangle::~Triangle(){}
+void Triangle::displaySides()
+    {
+        cout << "Side A:" << sideA << " " << "Side B:" << sideB << " " <<"Side C:" << sideC << endl ;
+    }
+void Triangle::changeSides()
+    {
+        cout << "New dimensions of the sides:"  << endl;
+        cin >> sideA >> sideB >> sideC;
+        area = this ->calculateArea();
+        circuit = this -> calculateCircuit();
+    }
+double Triangle:: calculateArea()
+    {
+        double area;
+        double a;
+        a =( sideA + sideB + sideC) /2;
+        area = sqrt (a * (a -sideA) * (a - sideB) * (a - sideC));
+        return area;
+    }
+double Triangle:: calculateCircuit()
+    {
+    return  sideA + sideB + sideC;
+    }
+void Triangle::displayAreaCircuit()
+    {
+        cout << "Trianglee area:"  << area << endl;
+        cout << "Triangle circuit:"  << circuit << endl;
+    }
+
+int main()
+{
+    int numberArr =0;
+    cout << "Enter the number of figures  " << endl ;
+    cin >> numberArr;
+
+
+    Figure** figureArray = new Figure *[numberArr] ;
+    char choice;
+    for ( int i= 0; i < numberArr; ++i)
+    {
+        cout << "Choose a figure: rectangle or triangle " << endl << "R - retrangle, T - triangle" << endl;
+        cout << "Your choice :" << endl;
+        cin >> choice;
+
+        if (choice == 'R')
+           {
+               figureArray[i] = new Retrangle();
+           } else {
+               figureArray[i] = new Triangle();
+           }
+            figureArray[i] ->changeSides();
+    }
+
+    for ( int i =0; i < numberArr; ++i)
+    {
+        figureArray [i] ->displaySides();
+        figureArray [i] ->displayAreaCircuit();
+    }
+
+    for ( int i=0 ; i < numberArr; ++i )
+    {
+        delete figureArray [i];
+    }
+    
+delete [] figureArray ;
+}
