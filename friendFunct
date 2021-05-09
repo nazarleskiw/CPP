@@ -1,0 +1,60 @@
+#include "mainwindow.h"
+#include <iostream>
+
+using namespace std;
+
+class friendClass;
+
+class mainClass {
+    friend friendClass;
+    friend void friendClassFunct (mainClass&);
+    public:
+        int publicInt;
+        mainClass();
+    protected:
+        int protecInt;
+    private:
+        int privateInt;
+        void showNumbers();
+};
+
+mainClass::mainClass() : publicInt(0), protecInt(0), privateInt(0) {}
+
+void mainClass:: showNumbers()
+    {
+        cout << " Public int =" << publicInt << " , protected int = " << protecInt << " , private int = " << privateInt << endl;
+    }
+class mainClass;
+class friendClass{
+    public:
+    void changeValue(mainClass &mc, int newPublicInt, int newProtecInt, int newPrivateInt);
+    void showFromMainClass (mainClass &mc);
+};
+
+void friendClass::changeValue(mainClass &mc, int newPublicInt, int newProtecInt, int newPrivateInt)
+{
+    cout << "Changing field values in mainClass " << endl;
+    mc.publicInt = newPublicInt;
+    mc.protecInt = newProtecInt;
+    mc.privateInt = newPrivateInt;
+}
+
+void friendClass:: showFromMainClass(mainClass &mc)
+{
+      cout << "mainClass method: " << endl;
+      mc.showNumbers();
+}
+
+
+int main()
+{
+    mainClass mojaKlasa;
+    friendClass friendclass;
+    friendclass.showFromMainClass(mojaKlasa);
+    friendclass.changeValue (mojaKlasa, 5,3,2);
+    friendclass.showFromMainClass(mojaKlasa);
+}
+
+
+
+
